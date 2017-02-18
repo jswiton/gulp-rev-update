@@ -70,7 +70,7 @@ const gulp = require('gulp');
 const browserify = require('browserify');
 const source = require('vinyl-source-stream');
 const buff = require('gulp-buffer');
-const rev = require('gulp-rev-update');
+const revUpdate = require('gulp-rev-update');
 
 gulp.task('rev-update', () =>
 	browserify(gulp.config.srcFolder + "/index.php")
