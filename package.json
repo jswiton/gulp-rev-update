@@ -1,6 +1,6 @@
 {
   "name": "gulp-rev-update",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Update occurences of filenames which have been renamed by gulp-rev",
   "main": "index.js",
   "scripts": {

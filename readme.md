@@ -10,21 +10,22 @@ $ npm install --save-dev gulp-rev-update
 
 ## Usage
 ```js
-var rev = require("gulp-rev");
-var revUpdate = require("gulp-rev-update");
-gulp.task("rev", ["build:css", "dist:js"], function(){
-  return gulp.src(["build/**/*.css", "build/**/*.js"])
+const rev = require('gulp-rev');
+const revUpdate = require('gulp-rev-update');
+
+gulp.task('rev', ['build:css', 'dist:js'], function(){
+  return gulp.src(['build/**/*.css', 'build/**/*.js'])
     .pipe(rev())
     .pipe(gulp.dest(gulp.config.distFolder))
     .pipe(rev.manifest())
     .pipe(gulp.dest(gulp.config.distFolder))
 })
 
-gulp.task("rev-update", ["rev"], function(){
-  var manifest = gulp.src("./" + gulp.config.distFolder + "/rev-manifest.json");
+gulp.task('rev-update', ['rev'], function(){
+  const manifestFile = `./${gulp.config.distFolder}/rev-manifest.json`;
 
-  return gulp.src(gulp.config.srcFolder + "/index.html")
-    .pipe(revUpdate({manifest: manifest}))
+  return gulp.src(`${gulp.config.srcFolder}/index.html`)
+    .pipe(revUpdate({ manifestFile }))
     .pipe(gulp.dest(gulp.config.distFolder));
 });
 ```
@@ -42,13 +43,13 @@ Only substitute in new filenames in files of these types.
 
 You can modify it, for example if you want update `xml` files do like below:
 ```js
-var revUpdate = require("gulp-rev-update");
+const revUpdate = require('gulp-rev-update');
 
-gulp.task("rev-update", ["rev"], function(){
-  var manifest = gulp.src("./" + gulp.config.distFolder + "/rev-manifest.json");
+gulp.task('rev-update', ['rev'], function(){
+  const manifestFile = `./${gulp.config.distFolder}/rev-manifest.json`;
 
-  return gulp.src(gulp.config.srcFolder + "/index.html")
-    .pipe(revUpdate({manifest: manifest, replaceInExtensions: ['xml']}))
+  return gulp.src(`${gulp.config.srcFolder}/index.html`)
+    .pipe(revUpdate({ manifestFile, replaceInExtensions: ['xml'] }))
     .pipe(gulp.dest(gulp.config.distFolder));
 });
 ```
@@ -73,7 +74,7 @@ const buff = require('gulp-buffer');
 const revUpdate = require('gulp-rev-update');
 
 gulp.task('rev-update', () =>
-	browserify(gulp.config.srcFolder + "/index.php")
+	browserify(`${gulp.config.srcFolder}/index.php`)
 		.pipe(source('index.php'))
 		.pipe(buff())
 		.pipe(revUpdate())
